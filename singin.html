@@ -13,8 +13,33 @@
 
 <body>
 
-<section class>
+<section class="min-h-screen max-w-md mx-auto">
+  <div class="card-top pt-32">
+     <img src="assets/github-logo.png"  alt="" class="w-[250px]mx-auto"> 
+      <h1 class="text-2x1 text-[#1F2937] font-blod text-center">
+        Github Issues Tracker
+      </h1>
+      <p class="text-xl text-[#1F2937]  text-center">
+        Sign in to manage your issues
+        </p>
+  </div>
+  <div class="card-body mx-auto items-center">
+        <fieldset
+          class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+        >
+          <label  class="label text-[#1F2937]">Username</label>
+          <input id="username" type="text" class="input" placeholder="Enter your Username" />
+          <p class="text-[#4A00FF]">Default: admin</p>
 
+          <label  class="label text-[#1F2937]">Password</label>
+          <input id="password" type="password" class="input" placeholder="Password" />
+          <p class="text-[#4A00FF]">Default: admin123</p>
+
+          <button id="signin-btn" onclick="signIn()" class="btn btn-primary mt-4">Sign In</button>
+        </fieldset>
+      </div>
 </section>  
+
+<script src="script/signin.js"> </script>
 </body>
 </html>

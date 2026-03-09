@@ -1,65 +1,479 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- tailwind and daisyui -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/daisyui@5"
-    rel="stylesheet"
-    type="text/css"
-  />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<title>GitHub Issues Tracker</title>
 
-  <!-- font awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+<style>
 
-  <body>
-    <section class="min-h-screen max-w-md mx-auto">
-      <div class="card-top pt-32">
-        <img src="assets/github-logo.png" alt="" class="w-[250px] mx-auto" />
-        <h1 class="text-2xl text-[#1F2937] font-bold text-center">
-          GitHub Issues Tracker
-        </h1>
-        <p class="text-xl text-[#1F2937] text-center">
-          Sign in to manage your issues
-        </p>
-      </div>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
 
-      <div class="card-body mx-auto items-center">
-        <fieldset
-          class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
-        >
-          <label  class="label text-[#1F2937]">Username</label>
-          <input id="username" type="text" class="input" placeholder="Enter your Username" />
-          <p class="text-[#4A00FF]">Default: admin</p>
+body{
+background:#f3f4f6;
+}
 
-          <label  class="label text-[#1F2937]">Password</label>
-          <input id="password" type="password" class="input" placeholder="Password" />
-          <p class="text-[#4A00FF]">Default: admin123</p>
+/* navbar */
 
-          <button id="signin-btn" onclick="signIn()" class="btn btn-primary mt-4">Sign In</button>
-          <br>
-          <br>
-          <hr >
-          <div class="text-center text-[#1F2937] space-y-2">
-            <p>OR</p>
-            <p>Demo Credentials:</p>
-            <p><span class="font-bold">Username:</span> admin</p>
-            <p><span  class="font-bold" >Password:</span> admin123</p>
-          </div>
-        </fieldset>
-      </div>
-    </section>
-    <script src="script/signin.js"></script>
-  </body>
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:white;
+border-bottom:1px solid #ddd;
+}
+
+.logo{
+font-size:20px;
+font-weight:600;
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.logo img{
+width:28px;
+}
+
+.nav-right{
+display:flex;
+gap:15px;
+align-items:center;
+}
+
+.search{
+padding:8px 12px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.new-btn{
+background:#6d28d9;
+color:white;
+padding:8px 14px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* tab-box */
+
+.tab-box{
+background:white;
+margin:30px auto;
+width:90%;
+padding:20px;
+border-radius:10px;
+}
+
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom: 20px;
+}
+
+.tab{
+padding:8px 18px;
+border-radius:6px;
+background:#eee;
+cursor:pointer;
+}
+
+.tab.active{
+background:#6d28d9;
+color:white;
+}
+
+/* info-bar */
+
+.info-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:20px;
+}
+
+.issue-summary{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.issue-summary span{
+font-weight:600;
+font-size:18px;
+}
+
+.marker{
+display:flex;
+gap:15px;
+}
+
+.marker span{
+display:flex;
+align-items:center;
+gap:5px;
+}
+
+.dot{
+width:10px;
+height:10px;
+border-radius:50%;
+}
+
+.green{background:green;}
+.purple{background:purple;}
+
+/* grid */
+
+.issues{
+margin-top:20px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+/* card */
+
+.card{
+background:white;
+border-radius:8px;
+padding:15px;
+cursor:pointer;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+border-top:4px solid transparent;
+}
+
+.card.open{border-top-color:green;}
+.card.closed{border-top-color:purple;}
+
+.priority{
+font-size:11px;
+padding:3px 8px;
+border-radius:10px;
+float:right;
+}
+
+.high{background:#ffe4e6;color:#dc2626;}
+.medium{background:#fff7ed;color:#ea580c;}
+.low{background:#e5e7eb;color:#555;}
+
+.card h4{
+margin-top:10px;
+font-size:15px;
+}
+
+.desc{
+font-size:12px;
+color:#666;
+margin:8px 0;
+}
+
+.labels span{
+font-size:11px;
+padding:3px 8px;
+border-radius:10px;
+margin-right:5px;
+}
+
+.bug{background:#fee2e2;color:#dc2626;}
+.help{background:#fef3c7;color:#d97706;}
+.enhance{background:#dcfce7;color:#16a34a;}
+
+.meta{
+margin-top:10px;
+font-size:11px;
+color:#777;
+}
+
+.issue-buttons{
+display:flex;
+gap:8px;
+margin-top:8px;
+}
+
+.issue-buttons button{
+border:none;
+padding:4px 10px;
+border-radius:12px;
+font-size:11px;
+cursor:pointer;
+}
+
+.bug-btn{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.help-btn{
+background:#fef3c7;
+color:#d97706;
+}
+
+/* modal */
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+width:600px;
+padding:30px;
+border-radius:12px;
+}
+
+.meta-line{
+margin:10px 0;
+color:#6b7280;
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.status-badge{
+background:#16a34a;
+color:white;
+padding:5px 12px;
+border-radius:15px;
+font-size:12px;
+}
+
+.labels{
+margin:15px 0;
+}
+
+.labels span{
+padding:4px 10px;
+border-radius:12px;
+font-size:12px;
+margin-right:8px;
+}
+
+.bug{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.help{
+background:#fef3c7;
+color:#d97706;
+}
+
+.issue-desc{
+margin:15px 0;
+color:#555;
+}
+
+.details-box{
+display:flex;
+justify-content:space-between;
+background:#f3f4f6;
+padding:15px;
+border-radius:8px;
+margin-top:10px;
+}
+
+.label-title{
+color:#777;
+font-size:13px;
+}
+
+.priority-badge{
+background:#ef4444;
+color:white;
+padding:5px 10px;
+border-radius:15px;
+font-size:12px;
+}
+
+.modal-footer{
+margin-top:20px;
+text-align:right;
+}
+
+.modal-footer button{
+background:#6d28d9;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.modal-box{
+background:white;
+padding:25px;
+border-radius:8px;
+width:400px;
+}
+
+/* loading */
+
+.spinner{
+text-align:center;
+padding:20px;
+display:none;
+}
+
+/* ............... */
+.spinner{
+display:none;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+.loader{
+width:40px;
+height:40px;
+border:4px solid #e5e7eb;
+border-top:4px solid #6d28d9;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+/* responsive */
+
+@media(max-width:1000px){
+
+.issues{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.issues{
+grid-template-columns:1fr;
+}
+
+.navbar{
+flex-direction:column;
+gap:10px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- navbar -->
+
+<div class="navbar">
+
+<div class="logo">
+<img src="assets/github-logo.png">
+GitHub Issues Tracker
+</div>
+
+<div class="nav-right">
+<input class="search" id="searchInput" placeholder="Search issues...">
+<button class="new-btn">+ New Issue</button>
+</div>
+
+</div>
+
+
+<div class="tab-box">
+
+<div class="tabs">
+<div class="tab active" onclick="filterIssues('all',this)">All</div>
+<div class="tab" onclick="filterIssues('open',this)">Open</div>
+<div class="tab" onclick="filterIssues('closed',this)">Closed</div>
+</div>
+
+
+<div class="info-bar">
+
+<div class="issue-summary">
+    <div><img src="assets/Aperture.png" alt=""></div>
+    <div><span id="count">0 Issues</span>
+<p>Track and manage your project issues</p></div>
+
+</div>
+
+<div class="marker">
+<span><div class="dot green"></div>Open</span>
+<span><div class="dot purple"></div>Closed</span>
+</div>
+
+</div>
+
+<div class="spinner" id="spinner">
+<div class="loader"></div>
+</div>
+
+<div class="issues" id="issues"></div>
+
+</div>
+
+
+<!-- modal -->
+
+<div class="modal" id="issueModal">
+
+<div class="modal-content">
+
+<h2 id="issueTitle"></h2>
+
+<div class="meta-line">
+<span class="status-badge" id="issueStatus"></span>
+<span id="issueAuthor"></span>
+<span id="issueDate"></span>
+</div>
+
+<div class="labels" id="issueLabels"></div>
+
+<p class="issue-desc" id="issueDescription"></p>
+
+<div class="details-box">
+
+<div>
+<p class="label-title">Assignee:</p>
+<p id="issueAssignee"></p>
+</div>
+
+<div>
+<p class="label-title">Priority:</p>
+<span class="priority-badge" id="issuePriority"></span>
+</div>
+
+</div>
+
+<div class="modal-footer">
+<button onclick="closeModal()">Close</button>
+</div>
+
+</div>
+
+</div>
+
+
+<script src="index.js"></script>
+
+</body>
 </html>

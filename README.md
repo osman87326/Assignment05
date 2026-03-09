@@ -1,5 +1,7 @@
-1.What is the difference between var, let, and const?
-Ans: 
+# 1.What is the difference between var, let, and const?
+
+Ans:
+
 var was the previous primary method of declaring a variable in JavaScript. Variables defined with this keyword can be redeclared and updated within the current function.
 
 let is now the primary method of declaring variables in JavaScript. Variables created with this keyword can be changed but not redeclared in the same function.
@@ -24,7 +26,6 @@ The forEach()method will execute a function against each element of an array, bu
 
 Ans:
 Arrow functions provide a concise, modern way to write functions in JavaScript; thus, they help to reduce the amount of code needed for a particular task while allowing for greater efficiency.
-
 
 5️.What are template literals?
 

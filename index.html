@@ -1,29 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<!--tailwind and daisyui-->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<!--fontawesome-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
 
-<body>
+  <!-- tailwind and daisyui -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/daisyui@5"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-<section class="min-h-screen max-w-md mx-auto">
-  <div class="card-top pt-32">
-     <img src="assets/github-logo.png"  alt="" class="w-[250px]mx-auto"> 
-      <h1 class="text-2x1 text-[#1F2937] font-blod text-center">
-        Github Issues Tracker
-      </h1>
-      <p class="text-xl text-[#1F2937]  text-center">
-        Sign in to manage your issues
+  <!-- font awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <body>
+    <section class="min-h-screen max-w-md mx-auto">
+      <div class="card-top pt-32">
+        <img src="assets/github-logo.png" alt="" class="w-[250px] mx-auto" />
+        <h1 class="text-2xl text-[#1F2937] font-bold text-center">
+          GitHub Issues Tracker
+        </h1>
+        <p class="text-xl text-[#1F2937] text-center">
+          Sign in to manage your issues
         </p>
-  </div>
-  <div class="card-body mx-auto items-center">
+      </div>
+
+      <div class="card-body mx-auto items-center">
         <fieldset
           class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
         >
@@ -36,7 +48,7 @@
           <p class="text-[#4A00FF]">Default: admin123</p>
 
           <button id="signin-btn" onclick="signIn()" class="btn btn-primary mt-4">Sign In</button>
-        <br>
+          <br>
           <br>
           <hr >
           <div class="text-center text-[#1F2937] space-y-2">
@@ -45,11 +57,9 @@
             <p><span class="font-bold">Username:</span> admin</p>
             <p><span  class="font-bold" >Password:</span> admin123</p>
           </div>
-       
         </fieldset>
       </div>
-</section>  
-
-<script src="script/signin.js"> </script>
-</body>
+    </section>
+    <script src="script/signin.js"></script>
+  </body>
 </html>
